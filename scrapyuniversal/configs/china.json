@@ -1,0 +1,74 @@
+{
+  "爬虫名称": "",
+  "spider": "universal",
+  "站点描述": "",
+  "website": "中华网科技",
+  "type": "新闻",
+  "index": "http://tech.china.com/",
+  "settings": {
+    "USER_AGENT": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36"
+  },
+  "start_urls": [
+    "http://tech.china.com/articles/"
+  ],
+  "allowed_domains": [
+    "tech.china.com"
+  ],
+  "rules": "china",
+  "item": {
+    "class": "NewsItem",
+    "loader": "ChinaLoader",
+    "attrs": {
+      "news_title": [
+        {
+          "method": "xpath",
+          "args": [
+            "//h1[@id='chan_newsTitle']/text()"
+          ]
+        }
+      ],
+      "news_url": [
+        {
+          "method": "attr",
+          "args": [
+            "url"
+          ]
+        }
+      ],
+      "news_text": [
+        {
+          "method": "xpath",
+          "args": [
+            "//div[@id='chan_newsDetail']//text()"
+          ]
+        }
+      ],
+      "news_publish_time": [
+        {
+          "method": "xpath",
+          "args": [
+            "//div[@id='chan_newsInfo']/text()"
+          ],
+          "re": "(\\d+-\\d+-\\d+\\s\\d+:\\d+:\\d+)"
+        }
+      ],
+      "news_source": [
+        {
+          "method": "xpath",
+          "args": [
+            "//div[@id='chan_newsInfo']/text()"
+          ],
+          "re": "来源：(.*)"
+        }
+      ],
+      "news_website": [
+        {
+          "method": "value",
+          "args": [
+            "中华网"
+          ]
+        }
+      ]
+    }
+  }
+}
